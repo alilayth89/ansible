@@ -5,10 +5,10 @@
   tasks:
 
 
-  - name: install apache2 and htop package Ubuntu
+  - name: install vim and htop package Ubuntu
     apt:
       name:
-        - apache2
+        - vim
         - htop
       state: latest
       update_cache: yes
@@ -19,10 +19,10 @@
 
 
 # now matching on CentOS
-  - name: install apache2 and htop package CentOS
+  - name: install vim and htop package CentOS
     dnf:
       name:
-        - httpd
+        - vim
         - htop
       state: latest
       update_cache: yes
