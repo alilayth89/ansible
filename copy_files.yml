@@ -1,0 +1,30 @@
+---
+
+- hosts: all
+  become: true
+  pre_tasks:
+
+# Install updates on all devices on the list
+  - name: install updates (CentOS)
+    tags: always
+    dnf:
+      update_only: yes
+      update_cache: yes
+    when: ansible_distribution == "CentOS"
+
+  - name: install updates (Ubuntu)
+    tags: always
+    apt:
+      update_cache: yes
+    when: ansible_distribution == "Ubuntu"
+
+  - name: copy files to DNS servers
+    tags: dns,ubuntu
+    copy:
+      src: defaut_files.html
+      dest: /home/sysadmin/copied.html
+      owner: root
+      group: root
+      mode: 0644
+
+
