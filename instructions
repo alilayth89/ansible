@@ -1,0 +1,13 @@
+git status
+git add inventory
+git commit -m "ansible cfg"
+git push
+git pull
+
+
+ansible-playbook --ask-become-pass install_apache.yml
+
+ansible all --key-file ~/.ssh/ansibleserver -i inventory -m ping
+
+ansible all -m ping
+ansible all -m gather_facts
