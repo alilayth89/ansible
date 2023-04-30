@@ -11,3 +11,5 @@ ansible all --key-file ~/.ssh/ansibleserver -i inventory -m ping
 
 ansible all -m ping
 ansible all -m gather_facts
+ansible-playbook --list-tags site.yml
+ansible-playbook --tags centos --ask-become-pass site.yml
