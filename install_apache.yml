@@ -4,30 +4,26 @@
   become: true
   tasks:
 
-  - name: update repository index
-    apt:
-      update_cache: yes
-    when: ansible_distribution == "Ubuntu"
-    # or you can do this:
-    # when: ansible_distribution in ["Debian", "Ubuntu"]
-  - name: install apache2 and htop package
+
+  - name: install apache2 and htop package Ubuntu
     apt:
       name:
         - apache2
         - htop
       state: latest
+      update_cache: yes
     when: ansible_distribution == "Ubuntu"
+    # or you can do this:
+    # when: ansible_distribution in ["Debian", "Ubuntu"]
+
+
 
 # now matching on CentOS
-  - name: update repository index
-    dnf:
-      update_cache: yes
-    when: ansible_distribution == "CentOS"
-
-  - name: install apache2 and htop package
+  - name: install apache2 and htop package CentOS
     dnf:
       name:
         - httpd
         - htop
       state: latest
+      update_cache: yes
     when: ansible_distribution == "CentOS"
