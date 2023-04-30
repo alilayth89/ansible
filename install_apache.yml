@@ -8,7 +8,22 @@
     apt:
       update_cache: yes
     when: ansible_distribution == "Ubuntu"
+    # or you can do this:
+    # when: ansible_distribution in ["Debian", "Ubuntu"]
   - name: install apache2 package
     apt:
       name: apache2
+      state: latest
     when: ansible_distribution == "Ubuntu"
+
+# now matching on CentOS
+  - name: update repository index
+    dnf:
+      update_cache: yes
+    when: ansible_distribution == "CentOS"
+
+  - name: install apache2 package
+    dnf:
+      name: httpd
+      state: latest
+    when: ansible_distribution == "CentOS"
