@@ -13,7 +13,7 @@
 
   - name: install updates (Ubuntu)
     apt:
-      update_only: yes
+      upgrade: dist
       update_cache: yes
     when: ansible_distribution == "Ubuntu"
 
