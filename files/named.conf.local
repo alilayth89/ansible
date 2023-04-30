@@ -8,15 +8,6 @@
 
 
 
-zone "shams.com" {
-        type master;
-        file "/etc/bind/shams.com";
-};
-
-zone "vega-box.com" {
-        type master;
-        file "/etc/bind/vega-box.com";
-};
 
 zone "10.168.192.in-addr.arpa" {
         type master;
