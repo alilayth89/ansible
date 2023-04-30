@@ -1,0 +1,15 @@
+---
+
+- hosts: all
+  become: true
+  tasks:
+
+
+  - name: install vim and htop package
+    package:
+      name:
+        - "{{ vim_package }}"
+        - "{{ htop_package }}"
+      state: latest
+      update_cache: yes
+

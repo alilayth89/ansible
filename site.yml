@@ -1,0 +1,29 @@
+---
+
+- hosts: all
+  become: true
+  pre_tasks:
+
+
+  - name: install vim and htop package Ubuntu
+    apt:
+      name:
+        - vim
+        - htop
+      state: latest
+      update_cache: yes
+    when: ansible_distribution == "Ubuntu"
+    # or you can do this:
+    # when: ansible_distribution in ["Debian", "Ubuntu"]
+
+
+
+# now matching on CentOS
+  - name: install vim and htop package CentOS
+    dnf:
+      name:
+        - vim
+        - htop
+      state: latest
+      update_cache: yes
+    when: ansible_distribution == "CentOS"
