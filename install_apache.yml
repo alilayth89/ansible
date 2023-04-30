@@ -10,9 +10,11 @@
     when: ansible_distribution == "Ubuntu"
     # or you can do this:
     # when: ansible_distribution in ["Debian", "Ubuntu"]
-  - name: install apache2 package
+  - name: install apache2 and htop package
     apt:
-      name: apache2
+      name:
+        - apache2
+        - htop
       state: latest
     when: ansible_distribution == "Ubuntu"
 
@@ -22,8 +24,10 @@
       update_cache: yes
     when: ansible_distribution == "CentOS"
 
-  - name: install apache2 package
+  - name: install apache2 and htop package
     dnf:
-      name: httpd
+      name:
+        - httpd
+        - htop
       state: latest
     when: ansible_distribution == "CentOS"
