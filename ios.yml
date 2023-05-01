@@ -1,0 +1,16 @@
+---
+
+- name: General Configs
+  hosts: all
+  tasks:
+    - name: Add Banner
+      ios_banner:
+        banner: login
+        text: |
+          Hello khara
+        state: absent
+
+    - name: Add Loopback
+      ios_interface:
+       name: Loopback121
+       state: absent

@@ -1,0 +1,20 @@
+---
+
+# This playbook is to make backup for the IOS devices and store it on a config.txt file
+- name: Backup Cisco router configurations
+  hosts: all
+  gather_facts: no
+  vars:
+    backup_dir: /path/to/backup/directory
+  tasks:
+    - name: Backup router configuration
+      ios_command:
+        commands:
+          - "show running-config"
+      register: config_output
+      ignore_errors: true
+
+    - name: Save router configuration to file
+      copy:
+        content: "{{ config_output.stdout[0] }}"
+        dest: /home/sysadmin/ansible/files/{{ inventory_hostname }}-config.txt

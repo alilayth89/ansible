@@ -1,6 +1,16 @@
-[dns_servers]
-192.168.96.101
+#[dns_servers]
+#192.168.96.101
 
-[db_servers]
-192.168.100.3
-192.168.100.4
+#[db_servers]
+#192.168.100.3
+#192.168.100.4
+
+[routers]
+192.168.95.93
+
+[routers:vars]
+ansible_user=cisco
+ansible_password=cisco
+ansible_connection=network_cli
+ansible_network_os=ios
+
