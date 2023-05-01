@@ -1,21 +1,24 @@
 ---
 
+# this task is to call for roles from /ansible/roles/ directory which contains:
+#db, web, dns tasks and their files
+-
 - hosts: all
   become: true
   pre_tasks:
 
-# Install updates on all devices on the list
   - name: install updates (CentOS)
     tags: always
     dnf:
-      update_only: yes
       update_cache: yes
+    changed_when: false
     when: ansible_distribution == "CentOS"
 
   - name: install updates (Ubuntu)
     tags: always
     apt:
       update_cache: yes
+    changed_when: false
     when: ansible_distribution == "Ubuntu"
 
 
