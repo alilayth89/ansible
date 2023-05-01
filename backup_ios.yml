@@ -4,8 +4,8 @@
 - name: Backup Cisco router configurations
   hosts: all
   gather_facts: no
-  vars:
-    backup_dir: /path/to/backup/directory
+#  vars:
+#    backup_dir: /path/to/backup/directory
   tasks:
     - name: Backup router configuration
       ios_command:
