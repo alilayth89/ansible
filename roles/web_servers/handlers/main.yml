@@ -1,0 +1,6 @@
+- name: restart_apache
+  services:
+    name: "{{ apache_service }}"
+    state: restarted
+
+# to call this handler just simply use notify: restart_apache
