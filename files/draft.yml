@@ -1,0 +1,42 @@
+
+
+# adding a config line to a specific file:
+
+- name: change e-mail address for main
+  lineinfile:
+    path: /etc/httpd/conf/httpd.conf
+    regexp: '^ServerAdmin'
+    line: ServerAdmin testing@testemail.com
+  register: httpd    # this line is to make this task as a variable to match on later
+
+
+- name: restart httpd (CentOS)
+  service:
+    name: httpd
+    state: restarted
+  when: httpd.changed  # here to match on the previous variable edit state to activate this task
+
+
+
+# a task to create users
+- name: create ali user
+  user:
+    name: ali
+    groups: root
+
+# adding SSH key
+- name: add ssh key for ali
+  authorized_key:
+    user: ali
+    key: "SERVER_KEY_ADDED_HERE"
+
+- name: add sudoers file for ali
+  copy:
+    src: sudoer_ali   # this should be added as a file sudoer_ali, config will be explained below
+    dest: /etc/sudoers.d/ali
+    owner: root
+    group: root
+    mode: 0440
+
+# sudoer_ali file should contain:
+#     ali ALL=(ALL) NOPASSWD: ALL
