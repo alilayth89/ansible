@@ -3,6 +3,11 @@
 - hosts: all
   become: true
   pre_tasks:
+:q
+
+
+
+
 
 # Install updates on all devices on the list
   - name: install updates (CentOS)
@@ -38,11 +43,22 @@
     # OR do: when: ansible_distribution in ["Debian", "Ubuntu"]
 
 # now matching on CentOS
-  - name: install vim and htop package CentOS
+  - name: install httpd and htop package CentOS
     tags: dns,centos
     dnf:
       name:
-        - vim
+        - httpd
         - htop
       state: latest
     when: ansible_distribution == "CentOS"
+
+
+# managing specific services on a server
+  - name: start httpd (CentOS)
+    tags: httpd,centos
+    service:
+      name: httpd
+      state: started
+      enabled: yes
+    when: ansible_distribution == "CentOS"
+
