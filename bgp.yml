@@ -1,0 +1,29 @@
+---
+
+# This playbook is to configure simple BGP configuration on Cisco routers
+
+- name: Adding BGP config and neighbors
+  hosts: all
+  tasks:
+    - name: write BGP routing config
+      ios_bgp:
+       config:
+         bgp_as: 65001
+         neighbors:
+           - neighbor: 10.0.12.2
+             remote_as: 65000
+           - neighbor: 10.0.13.3
+             remote_as: 65000
+         networks:
+           - prefix: 10.0.12.0
+             masklen: 24
+
+    - name: Configure route maps with BGP
+      ios_config:
+        lines:
+          - neighbor 10.0.12.2 route-map IN in
+          - neighbor 10.0.12.2 route-map OUT out
+        parents:
+          - router bgp 65001
+          - address-family ipv4
+
