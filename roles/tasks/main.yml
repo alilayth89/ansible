@@ -1,0 +1,5 @@
+# adding SSH key
+- name: add ssh key for ali
+  authorized_key:
+    user: ali
+    key: "SERVER_KEY_ADDED_HERE"

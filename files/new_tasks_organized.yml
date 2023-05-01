@@ -1,0 +1,40 @@
+---
+
+- hosts: all
+  become: true
+  pre_tasks:
+
+# Install updates on all devices on the list
+  - name: install updates (CentOS)
+    tags: always
+    dnf:
+      update_only: yes
+      update_cache: yes
+    when: ansible_distribution == "CentOS"
+
+  - name: install updates (Ubuntu)
+    tags: always
+    apt:
+      update_cache: yes
+    when: ansible_distribution == "Ubuntu"
+
+
+- hosts: all
+  become: true
+  roles:
+    - base
+
+- hosts: dns_servers
+  become: true
+  roles:
+    - dns_servers
+
+- hosts: web_servers
+  become: true
+  roles:
+    - web_servers
+
+- hosts: db_servers
+  become: true
+  roles:
+    - db_servers
